@@ -1,144 +1,335 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KVAKSHA SHOP – Донат Fortnite</title>
-    <style>
-        :root {
-            --green-dark: #1e6f4c;
-            --green: #2ecc71;
-            --green-light: #a8f0c6;
-            --bg: #0f2f24;
-            --card: #163f32;
-            --accent: #f1ff65;
-            --highlight: #ffd966;
-            --select-bg: #1f4e3c;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        body { background: radial-gradient(circle at top, #1b5e45, var(--bg)); color: #ffffff; min-height: 100vh; padding-bottom: 100px; }
-        header { background: linear-gradient(90deg, var(--green-dark), var(--green)); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 28px; font-weight: 900; letter-spacing: 2px; color: var(--accent); }
-        .logo span { color: #ffffff; }
-        nav a { color: #ffffff; margin-left: 20px; text-decoration: none; font-weight: 600; }
-        .hero { padding: 80px 40px; text-align: center; line-height: 1.6; }
-        .hero h1 { font-size: 48px; margin-bottom: 20px; }
-        .hero p { font-size: 20px; max-width: 900px; margin: 0 auto 40px; }
-        .catalog { padding: 60px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { background: linear-gradient(160deg, var(--card), #0d2a21); border-radius: 20px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); transition: transform 0.3s, box-shadow 0.3s; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
-        .card h3 { margin-bottom: 10px; }
-        .card p { margin: 5px 0; }
-        .price { font-size: 26px; font-weight: 800; color: var(--accent); margin-bottom: 15px; }
-        .buy-btn { display: inline-block; padding: 12px 20px; background: linear-gradient(90deg, var(--green), var(--accent)); color: #0a1f18; text-decoration: none; border-radius: 12px; font-weight: 800; cursor: pointer; margin-top: 10px; transition: background 0.3s; }
-        .buy-btn:hover { background: linear-gradient(90deg, var(--highlight), var(--accent)); }
-        select, input[type=number] {
-            padding: 8px;
-            border-radius: 12px;
-            border: none;
-            background: var(--select-bg);
-            color: #fff;
-            margin-bottom: 10px;
-            width: 100%;
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            text-align: center;
-            font-weight: 600;
-        }
-        .number-input { display: flex; align-items: center; justify-content: center; }
-        .number-input button { background: var(--green); color: #0a1f18; border: none; padding: 8px 12px; font-size: 18px; cursor: pointer; border-radius: 8px; margin: 0 5px; transition: background 0.3s; }
-        .number-input button:hover { background: var(--highlight); }
-        .number-input input { width: 60px; text-align: center; font-weight: 700; }
-        footer { position: fixed; bottom: 0; left: 0; width: 100%; background: #0b241c; padding: 15px; text-align: center; color: #7adbb0; font-size: 14px; }
-        footer a { color: var(--accent); font-weight: 700; text-decoration: none; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KVAKSHA SHOP</title>
+
+  <!-- ===================================================== -->
+  <!-- =============== ПОДКЛЮЧЕНИЕ ШРИФТОВ ================= -->
+  <!-- ===================================================== -->
+  <!-- Google Fonts (можно удалить, если используешь только локальные) -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- ===================================================== -->
+  <!-- ======================= СТИЛИ ====================== -->
+  <!-- ===================================================== -->
+  <style>
+    /* ===================================================== */
+    /* =============== ГЛОБАЛЬНЫЕ НАСТРОЙКИ ================= */
+    /* ===================================================== */
+
+    /* ===== ЕСЛИ НУЖНЫ ЛОКАЛЬНЫЕ ШРИФТЫ ИЗ КОРНЯ ===== */
+    /*
+    @font-face {
+      font-family: "MyLocalFont";
+      src: url("./MyLocalFont.woff2") format("woff2");
+    }
+    */
+
+    :root {
+      /* ===== ЦВЕТА ===== */
+      --color-main: #2ecc71;
+      --color-main-dark: #1f8f5f;
+      --color-bg-start: #0b3d2e;
+      --color-bg-end: #061f17;
+      --color-card: #0f3a2c;
+      --color-text: #eafff6;
+      --color-muted: #b7e6d3;
+      --color-accent: #f1ff5c;
+
+      /* ===== ШРИФТЫ (ВСЁ МЕНЯЕТСЯ ТОЛЬКО ЗДЕСЬ) ===== */
+      --font-logo: 'Bebas Neue', sans-serif;
+      --font-headings: 'Oswald', sans-serif;
+      --font-body: 'Inter', Arial, sans-serif;
+      --font-buttons: 'Oswald', sans-serif;
+
+      --header-height: 70px;
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: radial-gradient(circle at top, #1b6b4a 0%, var(--color-bg-start) 40%, var(--color-bg-end) 100%);
+      padding-top: var(--header-height);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px 100px;
+    }
+
+    /* ===================================================== */
+    /* ======================== ШАПКА ====================== */
+    /* ===================================================== */
+    header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: var(--header-height);
+      background: linear-gradient(90deg, var(--color-main-dark), var(--color-main));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0,0,0,.4);
+    }
+
+    header h1 {
+      font-family: var(--font-logo);
+      font-size: 26px;
+      letter-spacing: 3px;
+      color: var(--color-accent);
+    }
+
+    /* ===================================================== */
+    /* ====================== HERO-БЛОК ==================== */
+    /* ===================================================== */
+    .hero {
+      text-align: center;
+      padding: 130px 20px 90px;
+    }
+
+    .hero h2 {
+      font-family: var(--font-headings);
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 30px;
+      background: linear-gradient(90deg, var(--color-accent), #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 20px;
+      line-height: 1.7;
+      white-space: pre-line;
+      color: var(--color-text);
+    }
+
+    /* ===================================================== */
+    /* ==================== КАРТОЧКИ ======================= */
+    /* ===================================================== */
+    .category { margin-top: 80px; }
+
+    .category h3 {
+      font-family: var(--font-headings);
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: var(--color-accent);
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .product-card {
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,0));
+      backdrop-filter: blur(14px);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: 0 20px 40px rgba(0,0,0,.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 30px 60px rgba(0,0,0,.6);
+    }
+
+    .product-title {
+      font-family: var(--font-headings);
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .product-desc {
+      color: var(--color-muted);
+      margin-bottom: 20px;
+    }
+
+    .product-price {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--color-accent);
+      margin-bottom: 18px;
+    }
+
+    .product-button {
+      font-family: var(--font-buttons);
+      background: linear-gradient(90deg, var(--color-main), var(--color-accent));
+      color: #062016;
+      padding: 14px;
+      text-align: center;
+      border-radius: 14px;
+      font-weight: 700;
+    }
+
+    /* ===================================================== */
+    /* ========================= FAQ ======================= */
+    /* ===================================================== */
+    .faq {
+      max-width: 900px;
+      margin: 120px auto 0;
+    }
+
+    .faq h3 {
+      font-family: var(--font-headings);
+      font-size: 28px;
+      margin-bottom: 25px;
+      color: var(--color-accent);
+      text-align: center;
+    }
+
+    .faq-item {
+      background: rgba(255,255,255,.05);
+      border-radius: 20px;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 22px 26px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .faq-answer {
+      padding: 0 26px 22px;
+      display: none;
+      color: var(--color-muted);
+    }
+
+    /* ===================================================== */
+    /* ================== КАСТОМНЫЕ ЭМОДЗИ ================= */
+    /* ===================================================== */
+    .emoji {
+      display: inline-block;
+      width: 1.1em;
+      height: 1.1em;
+      vertical-align: -0.15em;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  </style>
 </head>
 <body>
+
 <header>
-    <div class="logo">KVAKSHA <span>SHOP</span></div>
-    <nav>
-        <a href="#hero">Главная</a>
-        <a href="#catalog">Каталог</a>
-    </nav>
+  <h1>KVAKSHA SHOP</h1>
 </header>
-<section class="hero" id="hero">
-    <h1>Стань королем Fortnite с KVAKSHA SHOP! 🐸</h1>
-    <p>Наш магазин предлагает уникальные условия для покупки V-Bucks и Отрядов Fortnite. Вы экономите на долгосрочных подписках, получаете быстрые доставки и выгодные пакеты, доступные только у нас! Покупка через Telegram – быстро, безопасно и удобно. Сделайте правильный выбор и получите максимум выгоды прямо сейчас!</p>
-</section>
-<section class="catalog" id="catalog">
 
-    <!-- Отряд Fortnite -->
-    <div class="card">
-        <h3>⛏ Отряд Fortnite</h3>
-        <label>Выбери длительность:</label>
-        <select id="squadSelect">
-            <option value="1100">5 месяцев — 1100 ₽</option>
-            <option value="620">3 месяца — 620 ₽</option>
-        </select>
-        <div class="price" id="squadPrice">1100 ₽</div>
-        <a class="buy-btn" href="https://t.me/KVAKSHA_shop" target="_blank">Посмотреть в Telegram</a>
+<div class="container">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <h2>
+      Стань королём Fortnite<br>
+      с KVAKSHA SHOP <emoji name="frog"></emoji>
+    </h2>
+    <p>
+Наш магазин предлагает уникальные условия для покупки V-Bucks и Отрядов Fortnite.
+Экономь на подписках, получай быстрые доставки и выгодные пакеты.
+Покупка через Telegram — просто, быстро и безопасно.
+    </p>
+  </section>
+
+  <!-- ================= ТОВАРЫ ================= -->
+  <section class="category">
+    <h3>Отряды</h3>
+    <div class="products" id="category-Отряды"></div>
+  </section>
+
+  <section class="category">
+    <h3>Вибаксы</h3>
+    <div class="products" id="category-Вибаксы"></div>
+  </section>
+
+  <section class="category">
+    <h3>Подарки</h3>
+    <div class="products" id="category-Подарки"></div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="faq">
+    <h3>FAQ</h3>
+
+    <div class="faq-item">
+      <div class="faq-question">Как проходит покупка?</div>
+      <div class="faq-answer">текст текст текст и т.д.</div>
     </div>
 
-    <!-- V-Bucks с заходом -->
-    <div class="card">
-        <h3>🪂 V-Bucks с заходом</h3>
-        <label>Выбери пакет:</label>
-        <select id="vbucksSelect">
-            <option value="600">1000 VB + 1 месяц отряда — 600 ₽</option>
-            <option value="1200">2800 VB — 1200 ₽</option>
-            <option value="1900">5000 VB — 1900 ₽</option>
-            <option value="2700">6600 VB — 2700 ₽</option>
-            <option value="3600">10000 VB — 3600 ₽</option>
-            <option value="4200">13500 VB — 4200 ₽</option>
-        </select>
-        <div class="price" id="vbucksPrice">600 ₽</div>
-        <a class="buy-btn" href="https://t.me/KVAKSHA_shop" target="_blank">Посмотреть в Telegram</a>
+    <div class="faq-item">
+      <div class="faq-question">Это безопасно?</div>
+      <div class="faq-answer">текст текст текст и т.д.</div>
     </div>
 
-    <!-- V-Bucks подарком -->
-    <div class="card">
-        <h3>🎁 V-Bucks подарком</h3>
-        <p style="color:#c8ffe3; margin-bottom:10px;">Накупи подарков вдоваль 🎉</p>
-        <label>Выбери количество (кратное 100):</label>
-        <div class="number-input">
-            <button id="decGift">-</button>
-            <input type="number" id="giftInput" value="100" readonly>
-            <button id="incGift">+</button>
-        </div>
-        <div class="price" id="giftPrice">20 ₽</div>
-        <a class="buy-btn" href="https://t.me/KVAKSHA_shop" target="_blank">Посмотреть в Telegram</a>
+    <div class="faq-item">
+      <div class="faq-question">Сколько ждать доставку?</div>
+      <div class="faq-answer">текст текст текст и т.д.</div>
     </div>
+  </section>
 
-</section>
-<footer>
-    ⚠️ Это не настоящий магазин. Официальный магазин: <a href="https://t.me/KVAKSHA_shop" target="_blank">t.me/KVAKSHA_shop</a>
-</footer>
+</div>
+
 <script>
-    // Отряд
-    const squadSelect = document.getElementById('squadSelect');
-    const squadPrice = document.getElementById('squadPrice');
-    squadSelect.addEventListener('change', () => { squadPrice.textContent = squadSelect.value + ' ₽'; });
+  /* ================= ТОВАРЫ ================= */
+  const products = [
+    { title: 'Отряд Fortnite', price: '1100 ₽', description: 'Краткое описание', link: 'https://funpay.com', category: 'Отряды' },
+    { title: '1000 V-Bucks', price: '600 ₽', description: 'Краткое описание', link: 'https://funpay.com', category: 'Вибаксы' },
+    { title: 'Подарок', price: '299 ₽', description: 'Краткое описание', link: 'https://funpay.com', category: 'Подарки' }
+  ];
 
-    // V-Bucks с заходом
-    const vbucksSelect = document.getElementById('vbucksSelect');
-    const vbucksPrice = document.getElementById('vbucksPrice');
-    vbucksSelect.addEventListener('change', () => { vbucksPrice.textContent = vbucksSelect.value + ' ₽'; });
+  products.forEach(p => {
+    const wrap = document.getElementById('category-' + p.category);
+    if (!wrap) return;
 
-    // V-Bucks подарком с красивыми стрелками
-    const giftInput = document.getElementById('giftInput');
-    const giftPrice = document.getElementById('giftPrice');
-    document.getElementById('incGift').addEventListener('click', () => {
-        let value = parseInt(giftInput.value) + 100;
-        giftInput.value = value;
-        giftPrice.textContent = (value/100*20) + ' ₽';
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <div>
+        <div class="product-title">${p.title}</div>
+        <div class="product-desc">${p.description}</div>
+      </div>
+      <div>
+        <div class="product-price">${p.price}</div>
+        <a class="product-button" href="${p.link}" target="_blank">Перейти на FunPay</a>
+      </div>`;
+
+    wrap.appendChild(card);
+  });
+
+  /* ================= FAQ ================= */
+  document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+      const a = q.nextElementSibling;
+      a.style.display = a.style.display === 'block' ? 'none' : 'block';
     });
-    document.getElementById('decGift').addEventListener('click', () => {
-        let value = parseInt(giftInput.value) - 100;
-        if(value < 100) value = 100;
-        giftInput.value = value;
-        giftPrice.textContent = (value/100*20) + ' ₽';
-    });
+  });
+
+  /* ================= КАСТОМНЫЕ ЭМОДЗИ ================= */
+  document.querySelectorAll('emoji').forEach(el => {
+    const name = el.getAttribute('name');
+    const span = document.createElement('span');
+    span.className = 'emoji';
+    span.style.backgroundImage = `url('./${name}.png')`;
+    el.replaceWith(span);
+  });
 </script>
+
 </body>
 </html>
